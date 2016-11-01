@@ -8,6 +8,25 @@
 //  -  a quantity
 //  -  a computed property called `orderPrice`, equal to price times quantity
 //
+  const Order = Ember.Object.extend({
+    orderPrice: Ember.computed('price', 'quantity', function(){
+      return this.get('price') * this.get('quantity');
+    })
+  });
+
+  const Cart = Ember.Object.extend({
+    orders:[],
+    addToCart: function(order){
+      this.get('orders')
+    },
+
+  });
+
+  let myCart = Cart.create();
+  myCart.addToCart(Order.create({price: 5, quantity: 2}));
+  myCart.addToCart(Order.create({price: 20, quantity: 1}));
+  myCart.addToCart(Order.create({price: 8, quantity: 3}));
+
 // A Cart should have
 //  -  an `addToCart` method, which adds a given Item to an array
 //      called `orders` (HINT: You'll probably need to look through the
